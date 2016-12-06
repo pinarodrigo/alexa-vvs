@@ -7,6 +7,6 @@ module.exports.zug = [
 
 app.get('/foehrich', function(req, res) {
     res.json({ foherich: module.exports.zug });
-})
+});
 
 app.listen(3000);

@@ -1,0 +1,9 @@
+---
+applications:
+- name: alexa-vvs
+  memory: 1024M
+  command: npm start
+  path: .
+  instances: 1
+  env:
+    NPM_CONFIG_PRODUCTION: false
