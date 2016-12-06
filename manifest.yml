@@ -1,7 +1,7 @@
 ---
 applications:
 - name: alexa-vvs
-  memory: 1024M
+  memory: 512M
   command: npm start
   path: .
   instances: 1
