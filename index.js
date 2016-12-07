@@ -1,12 +1,24 @@
 var express = require('express');
 var app = express();
+var request = require('request-promise');
 
-module.exports.zug = [
-    "nächster Zug kommt in 10 Minuten"
-];
+var options = {
+    method: 'GET',
+    uri: 'https://efa-api.asw.io/api/v1/station/5000154/departures/?format=json',
+    json: true
+};
 
 app.get('/foehrich', function(req, res) {
-    res.json({ foherich: module.exports.zug });
+    request(options)
+        .then(function(response) {
+            var vvsData = response;
+            res.json(vvsData.shift());
+        })
+        .catch(function(err) {
+            res.json("Danger Will Robinson, Danger!");
+        });
+
+
 });
 
-app.listen(3000);
+app.listen(process.env.PORT || 3000);
