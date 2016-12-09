@@ -12,13 +12,16 @@ app.get('/foehrich', function(req, res) {
     request(options)
         .then(function(response) {
             var vvsData = response;
-            res.json(vvsData.shift());
+            //res.json(vvsData.shift());
+            res.json("nächster Zug kommt in 10 Minuten an. U6 nach Fasanenhof");
         })
         .catch(function(err) {
             res.json("Danger Will Robinson, Danger!");
         });
-
-
 });
+
+
+
+
 
 app.listen(process.env.PORT || 3000);
