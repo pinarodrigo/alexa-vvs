@@ -31,7 +31,7 @@ function processTrainData(trainData) {
 
     var nextTrainTime = calculateTimeToNextTrain(trainData);
 
-    outPut = 'nächster Zug kommt in ' + nextTrainTime.minutes + ' Minute' + (nextTrainTime.minutes == 1 ? '' : 'n') + ' und ' + nextTrainTime.seconds + ' Sekunden. ' + trainData.number + ' nach ' + trainData.direction;
+    outPut = 'Zug kommt in ' + nextTrainTime.minutes + ' Minute' + (nextTrainTime.minutes == 1 ? '' : 'n') + ' und ' + nextTrainTime.seconds + ' Sekunden. ' + trainData.number + ' nach ' + trainData.direction;
 
     return outPut;
 }
@@ -53,7 +53,10 @@ app.get('/foehrich', function(req, res) {
             if (isTrainAlreadyGone(vvsTrain)) {
                 vvsTrain = response.shift();
             }
+            var subsequentTrain = response.shift();
             result = processTrainData(vvsTrain);
+            result += ', nächster ';
+            result += processTrainData(subsequentTrain);
             res.json(result);
         })
         .catch(function(err) {
