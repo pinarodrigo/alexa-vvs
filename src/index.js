@@ -38,6 +38,7 @@ function processTrainData(trainData) {
 
 function isTrainAlreadyGone(trainData) {
     var nextTrainTime = calculateTimeToNextTrain(trainData);
+    var isGone = false;
     if (nextTrainTime.minutes <= 0) {
         isGone = true;
     }
