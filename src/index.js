@@ -27,11 +27,11 @@ function calculateTimeToNextTrain(trainData) {
 
 }
 
-function processTrainData(trainData) {
+function processTrainData(nextTrain) {
 
-    var nextTrainTime = calculateTimeToNextTrain(trainData);
+    var nextTrainTime = calculateTimeToNextTrain(nextTrain);
 
-    outPut = 'Zug kommt in ' + nextTrainTime.minutes + ' Minute' + (nextTrainTime.minutes == 1 ? '' : 'n') + ' und ' + nextTrainTime.seconds + ' Sekunden. ' + trainData.number + ' nach ' + trainData.direction;
+    outPut = nextTrain.number + " nach " + nextTrain.direction + " kommt in " + nextTrainTime.minutes + " Minuten und " + nextTrainTime.seconds + " Sekunden an."
 
     return outPut;
 }
@@ -45,9 +45,9 @@ function isTrainAlreadyGone(trainData) {
     return isGone;
 }
 
-app.get('/foehrich', function(req, res) {
+app.get('/foehrich', function (req, res) {
     request(options)
-        .then(function(response) {
+        .then(function (response) {
             var result = '';
             var vvsTrain = response.shift();
             if (isTrainAlreadyGone(vvsTrain)) {
@@ -55,11 +55,11 @@ app.get('/foehrich', function(req, res) {
             }
             var subsequentTrain = response.shift();
             result = processTrainData(vvsTrain);
-            result += ', nächster ';
+            result += ' ';
             result += processTrainData(subsequentTrain);
             res.json(result);
         })
-        .catch(function(err) {
+        .catch(function (err) {
             res.json("Danger Will Robinson, Danger!");
         });
 });
